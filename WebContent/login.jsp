@@ -18,7 +18,7 @@
 			
 			
 			<div class="col-md-6 offset-md-3">
-
+				<div class="text-danger">${errorMessage}</div>
 				<form action="login" method="post">
 					<div class="form-group">
 						<label for="exampleInputEmail1">Email address</label> <input

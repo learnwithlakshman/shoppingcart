@@ -5,9 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class User {
+public class Book {
 
-		private String username;
-		private String email;
-		private String password;
+		private int id;
+		private String title;
+		private float price;
 }

@@ -6,4 +6,5 @@ public interface UserService {
 
 		public User registerUser(User user);
 		public User loadUserByEmail(String email);
+		public boolean login(String email,String password);
 }
