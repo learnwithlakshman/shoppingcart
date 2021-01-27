@@ -21,27 +21,28 @@
 
 		<div class="row">
 			<div class="col-md-8 offset-md-2">
-
+				<h3>Items in the cart</h3>
 				<table class="table table-striped">
 					<thead>
 						<tr>
 							<th scope="col">#</th>
 							<th scope="col">Title</th>
 							<th scope="col">Price</th>
-							<th scope="col">Cart</th>
+						
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${books}" var="book">
+						<c:forEach items="${cartitems}" var="book">
 							<tr>
 								<td>${book.id}</td>
 								<td>${book.title}</td>
 								<td>${book.price}</td>
-								<td><a href='addtocart?id=${book.id}'>Add to cart</a></td>
+								
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				<a href="dashboard">add more</a>
 			</div>
 		</div>
 

@@ -7,4 +7,6 @@ import com.careerit.shoppingcart.domain.Book;
 public interface BookDao {
 
 		public List<Book> selectAllBooks();
+
+		public Book selectBookById(int id);
 }

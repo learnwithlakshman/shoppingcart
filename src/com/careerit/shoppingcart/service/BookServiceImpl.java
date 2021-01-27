@@ -1,6 +1,7 @@
 package com.careerit.shoppingcart.service;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +20,13 @@ public class BookServiceImpl implements BookService {
 		List<Book> books = bookDao.selectAllBooks();
 		logger.info("Total books found :" + books.size());
 		return books;
+	}
+
+	@Override
+	public Book getBookById(int id) {
+	    Objects.nonNull(id);
+	    Book book  = bookDao.selectBookById(id);
+		return book;
 	}
 
 }

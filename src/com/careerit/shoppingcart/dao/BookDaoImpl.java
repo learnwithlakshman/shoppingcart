@@ -33,4 +33,25 @@ public class BookDaoImpl implements BookDao {
 		return books;
 	}
 
+	@Override
+	public Book selectBookById(int id) {
+		Connection con = null;
+		Statement st = null;
+		ResultSet rs = null;
+		Book book = null;
+		try {
+			con = ConnectionUtil.util.getConnection();
+			st = con.createStatement();
+			rs = st.executeQuery("select * from book where id = " + id);
+			if (rs.next()) {
+				book = Book.builder().id(rs.getInt("id")).title(rs.getString("title")).price(rs.getFloat("price"))
+						.build();
+
+			}
+		} catch (Exception e) {
+			System.out.println("While loading books :" + e);
+		}
+		return book;
+	}
+
 }

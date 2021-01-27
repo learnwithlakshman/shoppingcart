@@ -1,6 +1,7 @@
 package com.careerit.shoppingcart.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -15,35 +16,44 @@ import com.careerit.shoppingcart.domain.Book;
 import com.careerit.shoppingcart.service.BookService;
 import com.careerit.shoppingcart.service.BookServiceImpl;
 
-/**
- * Servlet implementation class DashboardServlet
- */
-@WebServlet("/dashboard")
-public class DashboardServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-   
-	private BookService bookService = new BookServiceImpl();
-    public DashboardServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
+@WebServlet("/addtocart")
+public class CartServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	private BookService bookService = new BookServiceImpl();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		HttpSession session = request.getSession();
-		if(session ==null || session.getAttribute("user")==null) {
-			response.sendRedirect("login.jsp");
-			return;
-		}
-		
-		List<Book> books = bookService.getAllBooks();
-		request.setAttribute("books", books);
-		RequestDispatcher rd = request.getRequestDispatcher("viewbooks.jsp");
-		rd.forward(request, response);
+			String idStr= request.getParameter("id");
+			Book book =null;
+			if(idStr !=null) {
+				int id = Integer.parseInt(idStr);
+				 book = bookService.getBookById(id);
+				
+						
+			}
 			
+			HttpSession session = request.getSession();
+			if(session ==null || session.getAttribute("user")==null) {
+				response.sendRedirect("login.jsp");
+				return;
+			}
+			
+			Object cartItems = session.getAttribute("cartitems");
+			List<Book> books = new ArrayList<Book>();
+			if(cartItems != null) {
+				books = (List<Book>) cartItems;
+			}
+			books.add(book);
+			session.setAttribute("cartitems", books);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("viewcart.jsp");
+			rd.forward(request, response);
+			
+		
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

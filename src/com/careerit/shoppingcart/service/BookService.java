@@ -7,4 +7,5 @@ import com.careerit.shoppingcart.domain.Book;
 public interface BookService {
 
 		public List<Book> getAllBooks();
+		public Book getBookById(int id);
 }
